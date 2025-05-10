@@ -1,6 +1,8 @@
 tweakpng.aps
 .vs/
 *.user
+
+# Legacy build files
 Debug
 DebugU
 Release
@@ -11,3 +13,10 @@ Debug64
 DebugU64
 Release64
 ReleaseU64
+
+# Build files
+/build/
+
+# Vcpkg and installed packages
+/vcpkg/
+vcpkg_installed/

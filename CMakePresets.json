@@ -1,0 +1,28 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "windows-x64-vs2022-release",
+      "displayName": "Release build for Windows x64",
+      "generator": "Visual Studio 17 2022",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CONFIGURATION_TYPES": "Release",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-x64-vs2022-release",
+      "configurePreset": "windows-x64-vs2022-release",
+      "description": "Build the Release preset using Visual Studio 2022",
+      "jobs": 8
+    }
+  ]
+}
