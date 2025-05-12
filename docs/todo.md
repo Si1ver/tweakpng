@@ -1,4 +1,10 @@
-# List of things to do
+# TweakPNG: List of Things To Do
+
+This document contains a list of planned changes.
+
+The list reflects personal interests and is not necessarily based on the project's functional development needs. Before implementing any of the changes listed below, consider whether they **align with your goals or values**.
+
+There is no guarantee that any of these changes will actually be implemented.
 
 ## Features
 
@@ -18,7 +24,7 @@
 
 ## Building and Automation
 
-* CMake fails to build a project with current build profile due to a build error. Investigate and fix the issue, then document the build command in the readme file.
+* CMake fails to build the project with the current build profile due to a build error. Investigate and fix the issue, then describe the build command in the documentation.
 
 * Add CMake options for building without libpng and zlib support as described in original documentation.
 

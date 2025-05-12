@@ -21,6 +21,10 @@ target_sources(tweak_png PRIVATE
     drag2.cur
 )
 
+if (ENABLE_UNICODE)
+    target_compile_definitions(tweak_png PRIVATE UNICODE _UNICODE)
+endif()
+
 target_link_libraries(tweak_png PRIVATE ZLIB::ZLIB)
 target_link_libraries(tweak_png PRIVATE PNG::PNG)
 target_link_libraries(tweak_png PRIVATE comctl32.lib)

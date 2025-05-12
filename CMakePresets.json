@@ -15,13 +15,30 @@
         "CMAKE_CONFIGURATION_TYPES": "Release",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake"
       }
+    },
+    {
+      "name": "windows-x64-vs2022-ansi-release",
+      "displayName": "Release build for Windows x64 without Unicode support",
+      "generator": "Visual Studio 17 2022",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CONFIGURATION_TYPES": "Release",
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
+        "ENABLE_UNICODE": "OFF"
+      }
     }
   ],
   "buildPresets": [
     {
       "name": "windows-x64-vs2022-release",
       "configurePreset": "windows-x64-vs2022-release",
-      "description": "Build the Release preset using Visual Studio 2022",
+      "description": "Build the default x64 Release preset using Visual Studio 2022",
+      "jobs": 8
+    },
+    {
+      "name": "windows-x64-vs2022-ansi-release",
+      "configurePreset": "windows-x64-vs2022-ansi-release",
+      "description": "Build the x64 Release (no Unicode) preset using Visual Studio 2022",
       "jobs": 8
     }
   ]
