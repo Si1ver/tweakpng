@@ -33,26 +33,75 @@ To build the tool from source, install the following:
 
 1. Generate Visual Studio solution
 
-    CMake configuration presets for the most common build configurations are defined in the `CMakePresets.json`.
+    CMake configuration presets for common build configurations are defined in the `CMakePresets.json` file.
 
     Execute the following command to generate a Visual Studio solution using CMake:
 
     ```cmd
-    cmake -S . -B build --preset=PRESET_NAME
+    cmake -S <source path> -B <build path> --preset <preset name>
     ```
 
-    Replace `PRESET_NAME` with one of the following configuration presets:
+    In this command, the following fields should be specified:
 
-    | Preset Name | Platform | Generator | Options |
-    | ----------- | -------- | --------- | ------- |
-    | `windows-x64-vs2022-release` | Windows, x64, release | Visual Studio 2022 | (default) |
-    | `windows-x64-vs2022-ansi-release` | Windows, x64, release | Visual Studio 2022 | ENABLE_UNICODE = OFF |
+    * `<source path>` is the path to the root directory of the project.
+    * `<build path>` is the path to the directory where solution files will be generated.
+    * `<preset name>` is one of the predefined configuration presets (see the list below).
 
-    Generated files will appear in the `build` directory.
+    | Preset Name | Platform | Configurations | Generator | Options |
+    | ----------- | -------- | -------------- | --------- | ------- |
+    | `windows-x64-vs2022` | Windows, x86-64 (64-bit) | Release, Release with Debug Info, Debug | Visual Studio 2022 | *(default)* |
+    | `windows-x86-vs2022` | Windows, x86 (32-bit) | Release, Release with Debug Info, Debug | Visual Studio 2022 | *(default)* |
+    | `windows-arm64-vs2022` | Windows, AArch64 (64-bit) | Release, Release with Debug Info, Debug | Visual Studio 2022 | *(default)* |
+    | `windows-x64-vs2022-ansi` | Windows, x86-64 (64-bit) | Release, Release with Debug Info, Debug | Visual Studio 2022 | `ENABLE_UNICODE` = `OFF` |
+    | `windows-x86-vs202-ansi` | Windows, x86 (32-bit) | Release, Release with Debug Info, Debug | Visual Studio 2022 | `ENABLE_UNICODE` = `OFF` |
+    | `windows-arm64-vs2022-ansi` | Windows, AArch64 (64-bit) | Release, Release with Debug Info, Debug | Visual Studio 2022 | `ENABLE_UNICODE` = `OFF` |
+
+    Example command when executed from the root directory of the project:
+
+    ```cmd
+    cmake -S . -B build --preset windows-x64-vs2022
+    ```
+
+    Generated files will appear in the specified `<build path>` directory.
 
 2. Build the tool executable
 
-    Open the `tweak_png.sln` solution file in Visual Studio and use `Build -> Build Solution` to produce an executable application.
+    CMake build presets for common build configurations are defined in the `CMakePresets.json` file.
+
+    Execute the following command to build the generated solution using CMake:
+
+    ```cmd
+    cmake --build <build path> --preset <preset name>
+    ```
+
+    In this command, the following fields should be specified:
+
+    * `<build path>` is the path to the directory where solution files were generated.
+    * `<preset name>` is one of the predefined build presets (see the list below).
+
+    | Build Preset Name | Corresponding Configuration Preset | Platform | Configuration |
+    | ----------------- | ---------------------------------- | -------- | ------------- |
+    | `windows-x64-vs2022-release` | `windows-x64-vs2022` | Windows, x86-64 (64-bit) | Release |
+    | `windows-x64-vs2022-debug` | `windows-x64-vs2022` | Windows, x86-64 (64-bit) | Debug |
+    | `windows-x86-vs2022-release` | `windows-x86-vs2022` | Windows, x86 (32-bit) | Release |
+    | `windows-x86-vs2022-debug` | `windows-x86-vs2022` | Windows, x86 (32-bit) | Debug |
+    | `windows-arm64-vs2022-release` | `windows-arm64-vs2022` | Windows, AArch64 (64-bit) | Release |
+    | `windows-arm64-vs2022-debug` | `windows-arm64-vs2022` | Windows, AArch64 (64-bit) | Debug |
+    | `windows-x64-vs2022-ansi-release` | `windows-x64-vs2022-ansi` | Windows, x86-64 (64-bit) | Release |
+    | `windows-x64-vs2022-ansi-debug` | `windows-x64-vs2022-ansi` | Windows, x86-64 (64-bit) | Debug |
+    | `windows-x86-vs2022-ansi-release` | `windows-x86-vs2022-ansi` | Windows, x86 (32-bit) | Release |
+    | `windows-x86-vs2022-ansi-debug` | `windows-x86-vs2022-ansi` | Windows, x86 (32-bit) | Debug |
+    | `windows-arm64-vs2022-ansi-release` | `windows-arm64-vs2022-ansi` | Windows, AArch64 (64-bit) | Release |
+    | `windows-arm64-vs2022-ansi-debug` | `windows-arm64-vs2022-ansi` | Windows, AArch64 (64-bit) | Debug |
+
+    Example command when executed from the root directory of the project:
+
+    ```cmd
+    cmake --build build --preset windows-x64-vs2022-release
+    ```
+
+    > Note: The generated solution can be built using Visual Studio. \
+    > Open the `tweak_png.sln` solution file in Visual Studio and select `Build > Build Solution` from the menu to produce an executable application.
 
 ## CMake Options
 
@@ -60,4 +109,4 @@ The following CMake options are available:
 
 | Option Name | Default Value | Description |
 | ----------- | ------------- | ----------- |
-| ENABLE_UNICODE | ON | Enables Unicode support. |
+| `ENABLE_UNICODE` | `ON` | Enables Unicode support. |

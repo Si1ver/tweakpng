@@ -7,38 +7,166 @@
   },
   "configurePresets": [
     {
-      "name": "windows-x64-vs2022-release",
-      "displayName": "Release build for Windows x64",
+      "name": "windows-vs2022",
+      "hidden": true,
+      "description": "A base preset for generating solutions for Windows builds using Visual Studio 2022.",
       "generator": "Visual Studio 17 2022",
+      "toolchainFile": "$env{VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_CONFIGURATION_TYPES": "Release",
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake"
+        "CMAKE_CONFIGURATION_TYPES": "Release;RelWithDebInfo;Debug"
       }
     },
     {
-      "name": "windows-x64-vs2022-ansi-release",
-      "displayName": "Release build for Windows x64 without Unicode support",
-      "generator": "Visual Studio 17 2022",
+      "name": "windows-x86-vs2022",
+      "displayName": "Configure Windows x86 (VS2022)",
+      "description": "Generate a solution for a Windows x86 build using Visual Studio 2022.",
+      "inherits": "windows-vs2022",
+      "architecture": {
+        "value": "Win32"
+      }
+    },
+    {
+      "name": "windows-x64-vs2022",
+      "displayName": "Configure Windows x64 (VS2022)",
+      "description": "Generate a solution for a Windows x64 build using Visual Studio 2022.",
+      "inherits": "windows-vs2022",
+      "architecture": {
+        "value": "x64"
+      }
+    },
+    {
+      "name": "windows-arm64-vs2022",
+      "displayName": "Configure Windows arm64 (VS2022)",
+      "description": "Generate a solution for a Windows arm64 build using Visual Studio 2022.",
+      "inherits": "windows-vs2022",
+      "architecture": {
+        "value": "ARM64"
+      }
+    },
+    {
+      "name": "windows-x86-vs2022-ansi",
+      "displayName": "Configure Windows x86 no Unicode (VS2022)",
+      "description": "Generate a solution for a Windows x86 build without Unicode support using Visual Studio 2022.",
+      "inherits": "windows-x86-vs2022",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_CONFIGURATION_TYPES": "Release",
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
+        "ENABLE_UNICODE": "OFF"
+      }
+    },
+    {
+      "name": "windows-x64-vs2022-ansi",
+      "displayName": "Configure Windows x64 no Unicode (VS2022)",
+      "description": "Generate a solution for a Windows x64 build without Unicode support using Visual Studio 2022.",
+      "inherits": "windows-x64-vs2022",
+      "cacheVariables": {
+        "ENABLE_UNICODE": "OFF"
+      }
+    },
+    {
+      "name": "windows-arm64-vs2022-ansi",
+      "displayName": "Configure Windows arm64 no Unicode (VS2022)",
+      "description": "Generate a solution for a Windows arm64 build without Unicode support using Visual Studio 2022.",
+      "inherits": "windows-arm64-vs2022",
+      "cacheVariables": {
         "ENABLE_UNICODE": "OFF"
       }
     }
   ],
   "buildPresets": [
     {
+      "name": "windows-x86-vs2022-debug",
+      "displayName": "Build Windows x86 Debug (VS2022)",
+      "description": "Build Windows x86 Debug configuration using Visual Studio 2022",
+      "configurePreset": "windows-x86-vs2022",
+      "configuration": "Debug",
+      "jobs": 8
+    },
+    {
+      "name": "windows-x86-vs2022-release",
+      "displayName": "Build Windows x86 Release (VS2022)",
+      "description": "Build Windows x86 Release configuration using Visual Studio 2022",
+      "configurePreset": "windows-x86-vs2022",
+      "configuration": "Release",
+      "jobs": 8
+    },
+    {
+      "name": "windows-x64-vs2022-debug",
+      "displayName": "Build Windows x64 Debug (VS2022)",
+      "description": "Build Windows x64 Debug configuration using Visual Studio 2022",
+      "configurePreset": "windows-x64-vs2022",
+      "configuration": "Debug",
+      "jobs": 8
+    },
+    {
       "name": "windows-x64-vs2022-release",
-      "configurePreset": "windows-x64-vs2022-release",
-      "description": "Build the default x64 Release preset using Visual Studio 2022",
+      "displayName": "Build Windows x64 Release (VS2022)",
+      "description": "Build Windows x64 Release configuration using Visual Studio 2022",
+      "configurePreset": "windows-x64-vs2022",
+      "configuration": "Release",
+      "jobs": 8
+    },
+    {
+      "name": "windows-arm64-vs2022-debug",
+      "displayName": "Build Windows arm64 Debug (VS2022)",
+      "description": "Build Windows arm64 Debug configuration using Visual Studio 2022",
+      "configurePreset": "windows-arm64-vs2022",
+      "configuration": "Debug",
+      "jobs": 8
+    },
+    {
+      "name": "windows-arm64-vs2022-release",
+      "displayName": "Build Windows arm64 Release (VS2022)",
+      "description": "Build Windows arm64 Release configuration using Visual Studio 2022",
+      "configurePreset": "windows-arm64-vs2022",
+      "configuration": "Release",
+      "jobs": 8
+    },
+    {
+      "name": "windows-x86-vs2022-ansi-debug",
+      "displayName": "Build Windows x86 Debug no Unicode (VS2022)",
+      "description": "Build Windows x86 Debug configuration without Unicode support using Visual Studio 2022",
+      "configurePreset": "windows-x86-vs2022-ansi",
+      "configuration": "Debug",
+      "jobs": 8
+    },
+    {
+      "name": "windows-x86-vs2022-ansi-release",
+      "displayName": "Build Windows x86 Release no Unicode (VS2022)",
+      "description": "Build Windows x86 Release configuration without Unicode support using Visual Studio 2022",
+      "configurePreset": "windows-x86-vs2022-ansi",
+      "configuration": "Release",
+      "jobs": 8
+    },
+    {
+      "name": "windows-x64-vs2022-ansi-debug",
+      "displayName": "Build Windows x64 Debug no Unicode (VS2022)",
+      "description": "Build Windows x64 Debug configuration without Unicode support using Visual Studio 2022",
+      "configurePreset": "windows-x64-vs2022-ansi",
+      "configuration": "Debug",
       "jobs": 8
     },
     {
       "name": "windows-x64-vs2022-ansi-release",
-      "configurePreset": "windows-x64-vs2022-ansi-release",
-      "description": "Build the x64 Release (no Unicode) preset using Visual Studio 2022",
+      "displayName": "Build Windows x64 Release no Unicode (VS2022)",
+      "description": "Build Windows x64 Release configuration without Unicode support using Visual Studio 2022",
+      "configurePreset": "windows-x64-vs2022-ansi",
+      "configuration": "Release",
+      "jobs": 8
+    },
+    {
+      "name": "windows-arm64-vs2022-ansi-debug",
+      "displayName": "Build Windows arm64 Debug no Unicode (VS2022)",
+      "description": "Build Windows arm64 Debug configuration without Unicode support using Visual Studio 2022",
+      "configurePreset": "windows-arm64-vs2022-ansi",
+      "configuration": "Debug",
+      "jobs": 8
+    },
+    {
+      "name": "windows-arm64-vs2022-ansi-release",
+      "displayName": "Build Windows arm64 Release no Unicode (VS2022)",
+      "description": "Build Windows arm64 Release configuration without Unicode support using Visual Studio 2022",
+      "configurePreset": "windows-arm64-vs2022-ansi",
+      "configuration": "Release",
       "jobs": 8
     }
   ]
